@@ -1,8 +1,20 @@
 package com.userFront.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
 public class Recipient {
 	
 	/*variables*/
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String name;
 	private String email;
@@ -10,6 +22,9 @@ public class Recipient {
 	private String accountNumber;
 	private String description;
 	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	@JsonIgnore
 	private User user;
 
 	/*getters and setters*/
