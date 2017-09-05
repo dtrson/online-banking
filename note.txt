@@ -9,4 +9,5 @@
 #### BACKEND PART ####
 1.	JPA/Hibernate configurations will be put in resources/application.properties files
 2.	Dao folder: deals with persistence operations (JPA operations) from the persistence layer
-3.	Service folder: deals with any external services, except the services from the persistence layer  
+3.	Service folder: deals with any external services, except the services from the persistence layer 
+4.	Secure the Login using Spring Security: com.userFront.config.SecurityConfig.java
