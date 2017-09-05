@@ -1,0 +1,12 @@
+#### FONTEND PART ####
+
+1.	Put html files inside of resources/templates folder so that Spring Boot can read them
+2.	Syntax: "th:...": are thymeleaf syntax.
+3.	th:fragment="common-header": define template part using thymeleaf -> then call this template using: th:replace="common/header :: common-header"
+
+
+
+#### BACKEND PART ####
+1.	JPA/Hibernate configurations will be put in resources/application.properties files
+2.	Dao folder: deals with persistence operations (JPA operations) from the persistence layer
+3.	Service folder: deals with any external services, except the services from the persistence layer  
