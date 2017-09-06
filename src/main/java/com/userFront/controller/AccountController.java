@@ -71,4 +71,29 @@ public class AccountController {
 		
 		return "redirect:/userFront";
 	}
+	
+	@RequestMapping(value="/withdraw", method = RequestMethod.GET)
+	public String withdraw(Model model){
+		
+		model.addAttribute("accountType", "");
+		model.addAttribute("amount", "");
+		model.addAttribute("negativeBalance", false);
+		
+		return "withdraw";
+	}
+	
+	@RequestMapping(value="/withdraw", method = RequestMethod.POST)
+	public String withdrawPOST(@ModelAttribute("amount") String amount, @ModelAttribute("accountType") String accountType, Principal principal, Model model){
+
+		boolean success = accountService.withdraw(accountType,Double.parseDouble(amount), principal);
+		
+		if(!success){
+			model.addAttribute("accountType", "");
+			model.addAttribute("amount", "");
+			model.addAttribute("negativeBalance", true);
+			return "withdraw";  
+		}
+		
+		return "redirect:/userFront";
+	}
 }
