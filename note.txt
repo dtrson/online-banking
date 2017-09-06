@@ -17,3 +17,4 @@
 1.	Secure the Login using Spring Security: com.userFront.config.SecurityConfig.java
 2.  SALT in Spring Security is used to encode/encrypt password before storing to the database
 3.  Role defined: Admin & User
+4.  In the HomeController -> /signup service: instead of saving the new creating user to the database by using the CrudRepository save(user) method, spring security must be taken into account to encrypt the password and then save to the database -> creating new method: create(user) for this purpose!!!! 

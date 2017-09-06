@@ -166,12 +166,13 @@ public class User implements UserDetails {
 		this.userRoles = userRoles;
 	}
 
-
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", firstName="
 				+ firstName + ", lastName=" + lastName + ", email=" + email + ", phone=" + phone + ", enabled="
-				+ enabled + "]";
+				+ enabled + ", primaryAccount=" + primaryAccount + ", savingsAccount=" + savingsAccount
+				+ ", appointmentList=" + appointmentList + ", recipientList=" + recipientList + ", userRoles="
+				+ userRoles + "]";
 	}
 
 	@Override
