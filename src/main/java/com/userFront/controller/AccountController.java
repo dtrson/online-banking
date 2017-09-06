@@ -50,12 +50,22 @@ public class AccountController {
 		
 		model.addAttribute("accountType", "");
 		model.addAttribute("amount", "");
+		model.addAttribute("negativeDeposit", false);
 		
 		return "deposit";
 	}
 	
 	@RequestMapping(value="/deposit", method = RequestMethod.POST)
-	public String depositPOST(@ModelAttribute("amount") String amount, @ModelAttribute("accountType") String accountType, Principal principal){
+	public String depositPOST(@ModelAttribute("amount") String amount, @ModelAttribute("accountType") String accountType, Principal principal, Model model){
+		
+		if(Double.parseDouble(amount)<0){
+			
+			model.addAttribute("accountType", "");
+			model.addAttribute("amount", "");
+			model.addAttribute("negativeDeposit", true);
+			
+			return "deposit";
+		}
 		
 		accountService.deposit(accountType,Double.parseDouble(amount), principal);
 		
