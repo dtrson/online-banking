@@ -1,6 +1,7 @@
 package com.userFront.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,9 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.userFront.domain.PrimaryAccount;
+import com.userFront.domain.PrimaryTransaction;
 import com.userFront.domain.SavingsAccount;
+import com.userFront.domain.SavingsTransaction;
 import com.userFront.domain.User;
 import com.userFront.service.AccountService;
+import com.userFront.service.TransactionService;
 import com.userFront.service.UserService;
 
 @Controller
@@ -25,13 +29,19 @@ public class AccountController {
 	@Autowired 
 	private AccountService accountService;
 	
+	@Autowired
+	private TransactionService transactionService;
+	
 	@RequestMapping("/primaryAccount")
 	public String primaryAccount(Model model, Principal principal){
 		
 		User user = userService.findByUsername(principal.getName());
 		PrimaryAccount primaryAccount = user.getPrimaryAccount();
-		
+		List<PrimaryTransaction> primaryTransactionList = transactionService.findPrimaryTransactionList(principal.getName());
+				
 		model.addAttribute("primaryAccount", primaryAccount);
+		model.addAttribute("primaryTransactionList", primaryTransactionList);
+		
 		return "primaryAccount";
 	}
 	
@@ -40,8 +50,12 @@ public class AccountController {
 		
 		User user = userService.findByUsername(principal.getName());
 		SavingsAccount savingsAccount = user.getSavingsAccount();
+		List<SavingsTransaction> savingsTransactionList = transactionService.findSavingsTransactionList(principal.getName());
+		
 		
 		model.addAttribute("savingsAccount", savingsAccount);
+		model.addAttribute("savingsTransactionList", savingsTransactionList);
+		
 		return "savingsAccount";
 	}
 	
@@ -78,6 +92,7 @@ public class AccountController {
 		model.addAttribute("accountType", "");
 		model.addAttribute("amount", "");
 		model.addAttribute("negativeBalance", false);
+		model.addAttribute("negativeWithdraw", false);
 		
 		return "withdraw";
 	}
@@ -85,15 +100,29 @@ public class AccountController {
 	@RequestMapping(value="/withdraw", method = RequestMethod.POST)
 	public String withdrawPOST(@ModelAttribute("amount") String amount, @ModelAttribute("accountType") String accountType, Principal principal, Model model){
 
-		boolean success = accountService.withdraw(accountType,Double.parseDouble(amount), principal);
-		
-		if(!success){
+		if(Double.parseDouble(amount)<0){
+			
 			model.addAttribute("accountType", "");
 			model.addAttribute("amount", "");
-			model.addAttribute("negativeBalance", true);
-			return "withdraw";  
+			model.addAttribute("negativeBalance", false);
+			model.addAttribute("negativeWithdraw", true);
+			
+			return "withdraw";
+			
+		} else{
+			
+			boolean success = accountService.withdraw(accountType,Double.parseDouble(amount), principal);
+			
+			if(!success){
+				model.addAttribute("accountType", "");
+				model.addAttribute("amount", "");
+				model.addAttribute("negativeBalance", true);
+				model.addAttribute("negativeWithdraw", false);
+				
+				return "withdraw";  
+			}
+			
+			return "redirect:/userFront";
 		}
-		
-		return "redirect:/userFront";
 	}
 }

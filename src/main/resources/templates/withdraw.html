@@ -18,8 +18,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label>2. Please specify the amount you would like to withdraw: </label><span class="bg-danger pull-right" th:if="${negativeBalance}">Your withdraw amount is larger than your balance!!!</span>
-                    <span class="input-group-addon">Amount $</span>
+                    <label>2. Please specify the amount you would like to withdraw: </label>
+                    <span class="bg-danger pull-right" th:if="${negativeBalance}">Your withdraw amount is larger than your balance!!!</span>
+                    <span class="bg-danger pull-right" th:if="${negativeWithdraw}">Your withdraw amount is negative!!!</span>
+                    <span class="input-group-addon">Amount €</span>
                     <input th:value="${amount}" type="text" name="amount" id="amount" class="form-control" aria-label="Amount (to the nearest dollar)"/>
                 </div>
 

@@ -15,6 +15,7 @@ import com.userFront.domain.SavingsAccount;
 import com.userFront.domain.SavingsTransaction;
 import com.userFront.domain.User;
 import com.userFront.service.AccountService;
+import com.userFront.service.TransactionService;
 import com.userFront.service.UserService;
 
 /**
@@ -34,6 +35,9 @@ public class AccountServiceImpl implements AccountService {
 	
 	@Autowired 
 	private UserService userService;
+	
+	@Autowired
+	private TransactionService transactionService;
 	
 	@Override
 	public PrimaryAccount createPrimaryAccount() {
@@ -79,6 +83,7 @@ public class AccountServiceImpl implements AccountService {
 					primaryAccount.getAccountBalance(), 
 					primaryAccount);
 			
+			transactionService.savePrimaryDepositTransaction(primaryTransaction);
 			
 		}else if(accountType.equalsIgnoreCase("Savings")){
 			
@@ -95,6 +100,8 @@ public class AccountServiceImpl implements AccountService {
 					amount, 
 					savingsAccount.getAccountBalance(), 
 					savingsAccount);
+			
+			transactionService.saveSavingsDepositTransaction(savingsTransaction);
 		
 		}else{
 			
@@ -126,6 +133,9 @@ public class AccountServiceImpl implements AccountService {
 					amount, 
 					primaryAccount.getAccountBalance(), 
 					primaryAccount);
+			
+			transactionService.savePrimaryWithdrawTransaction(primaryTransaction);
+			
 			return true;
 			
 		}else if(accountType.equalsIgnoreCase("Savings")){
@@ -148,6 +158,9 @@ public class AccountServiceImpl implements AccountService {
 					amount, 
 					savingsAccount.getAccountBalance(), 
 					savingsAccount);
+			
+			transactionService.saveSavingsWithdrawTransaction(savingsTransaction);
+			
 			return true;
 			
 		}else{
