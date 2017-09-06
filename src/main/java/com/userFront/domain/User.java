@@ -22,6 +22,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.userFront.domain.security.Authority;
 import com.userFront.domain.security.UserRole;
 
+/**
+ * Created by @author sduong on 05.09.2017
+ *
+ */
 @Entity
 public class User implements UserDetails {
 	

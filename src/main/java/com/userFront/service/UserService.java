@@ -5,6 +5,10 @@ import java.util.Set;
 import com.userFront.domain.User;
 import com.userFront.domain.security.UserRole;
 
+/**
+ * Created by @author sduong on 05.09.2017
+ *
+ */
 public interface UserService {
 	
 	User findByUsername(String username);

@@ -9,12 +9,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.userFront.Dao.RoleDao;
-import com.userFront.Dao.UserDao;
+import com.userFront.dao.RoleDao;
+import com.userFront.dao.UserDao;
 import com.userFront.domain.User;
 import com.userFront.domain.security.UserRole;
+import com.userFront.service.AccountService;
 import com.userFront.service.UserService;
 
+/**
+ * Created by @author sduong on 05.09.2017
+ *
+ */
 @Service
 @Transactional
 public class UserServiceImpl implements UserService{
@@ -29,6 +34,9 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private AccountService accountService;
 	
 	public void save(User user){
 		userDao.save(user);
@@ -62,7 +70,10 @@ public class UserServiceImpl implements UserService{
 			
 			user.getUserRoles().addAll(userRoles);
 			
-
+			user.setPrimaryAccount(accountService.createPrimaryAccount());
+			user.setSavingsAccount(accountService.createSavingsAccount());
+			
+			
 			localUser = userDao.save(user);
 		}
 		return localUser;

@@ -8,9 +8,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.userFront.Dao.UserDao;
+import com.userFront.dao.UserDao;
 import com.userFront.domain.User;
 
+/**
+ * Created by @author sduong on 06.09.2017
+ *
+ */
 @Service
 public class UserSecurityService implements UserDetailsService  {
 	

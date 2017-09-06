@@ -11,6 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+/**
+ * Created by @author sduong on 06.09.2017
+ *
+ */
 @Entity
 public class Role {
 	

@@ -10,6 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+/**
+ * Created by @author sduong on 05.09.2017
+ *
+ */
 @Entity
 public class PrimaryTransaction {
 	

@@ -15,6 +15,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.userFront.service.UserServiceImpl.UserSecurityService;
 
+/**
+ * Created by @author sduong on 05.09.2017
+ *
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{

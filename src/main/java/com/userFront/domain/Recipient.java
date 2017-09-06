@@ -9,6 +9,10 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * Created by @author sduong on 05.09.2017
+ *
+ */
 @Entity
 public class Recipient {
 	

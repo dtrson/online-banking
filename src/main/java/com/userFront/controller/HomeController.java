@@ -10,11 +10,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.userFront.Dao.RoleDao;
+import com.userFront.dao.RoleDao;
 import com.userFront.domain.User;
 import com.userFront.domain.security.UserRole;
 import com.userFront.service.UserService;
 
+/**
+ * Created by @author sduong on 04.09.2017
+ *
+ */
 @Controller
 public class HomeController {
 	

@@ -11,6 +11,10 @@ import javax.persistence.Table;
 
 import com.userFront.domain.User;
 
+/**
+ * Created by @author sduong on 06.09.2017
+ *
+ */
 @Entity
 @Table(name = "user_role")
 public class UserRole {
